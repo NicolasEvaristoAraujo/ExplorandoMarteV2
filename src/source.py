@@ -40,24 +40,26 @@ def moveSonda( string ):
 
 def printSondaPosicao():
     dirName = ("E", "N", "W", "S")
+    print(" ")
     for i in range(0, total):
         print("%d %d %s" %(cord.posicao_final_X.pop(0), cord.posicao_final_Y.pop(0), dirName[ int((cord.direcao_final.pop(0)) / 90) ]))
 
+    input("\nPressione ENTER para sair")
+    
 def sondas():
     global total
-    global nSondas
     total = nSondas = 2
     
     for n in range(0, nSondas):
         #Coordenadas e direcao da sonda (X, Y, D)
-        x, y, d = input("X Y D: ").split(" ")
+        x, y, d = input("X[%d] Y[%d] D[%d]:  " %((n+1),(n+1),(n+1))).split(" ")
         
         cord.direcao = direct[d]
         cord.posX = int(x)
         cord.posY = int(y)
         
         #Entrada de dados para mover a sonda (L, R ou M)
-        string = input("L R M: ")
+        string = input("L[%d] R[%d] M[%d]:  " %((n+1),(n+1),(n+1)))
         
         moveSonda(string)
         
@@ -74,7 +76,7 @@ def main():
     print("***************************************")
     
     #Entrada de dados dos limites superiores do quadrante
-    limiteX, limiteY = input("X Y: ").split(" ")
+    limiteX, limiteY = input("Ponto superior-direito: ").split(" ")
 
     cord.limiteX = int( limiteX )
     cord.limiteY = int( limiteY )
