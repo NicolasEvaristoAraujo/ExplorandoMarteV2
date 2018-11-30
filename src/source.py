@@ -66,7 +66,7 @@ def sondas():
             return
         
         #Entrada de dados para mover a sonda (L, R ou M)
-        string = input("L[%d] R[%d] M[%d]:  " %((n+1),(n+1),(n+1)))
+        string = input("Entre com as direções S%d: " %(n+1))
         
         moveSonda(string)
         
