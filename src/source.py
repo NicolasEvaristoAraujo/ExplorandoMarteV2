@@ -61,7 +61,7 @@ def sondas():
         if cord.posX > cord.limiteX:
             print("Entrada inválida, valor maior que o limite permitido para X")
             return
-        if cord.posY > cord.limiteY:
+        elif cord.posY > cord.limiteY:
             print("Entrada inválida, valor maior que o limite permitido para Y")
             return
         
