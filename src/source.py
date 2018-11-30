@@ -57,6 +57,13 @@ def sondas():
         cord.direcao = direct[d]
         cord.posX = int(x)
         cord.posY = int(y)
+
+        if cord.posX > cord.limiteX:
+            print("Entrada inválida, valor maior que o limite permitido para X")
+            return
+        if cord.posY > cord.limiteY:
+            print("Entrada inválida, valor maior que o limite permitido para Y")
+            return
         
         #Entrada de dados para mover a sonda (L, R ou M)
         string = input("L[%d] R[%d] M[%d]:  " %((n+1),(n+1),(n+1)))
