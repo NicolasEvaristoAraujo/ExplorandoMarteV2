@@ -49,7 +49,7 @@ def printSondaPosicao():
     
 def sondas():
     global nSondas
-    nSondas = 3
+    nSondas = 2
     
     for n in range(0, nSondas):
         #Coordenadas e direcao da sonda (X, Y, D)
