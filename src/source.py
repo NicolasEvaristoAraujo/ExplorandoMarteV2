@@ -22,17 +22,17 @@ def moveSonda( string ):
             angulo = cord.direcao
             angulo = (angulo * 2 * math.pi)/360
 
-            cord.posX += int(math.cos(angulo))
-            if cord.posX > cord.limiteX:
-                cord.posX = cord.limiteX
-            elif cord.posX < 0:
-                cord.posX = 0
+            cord.pos[0] += int(math.cos(angulo))
+            if cord.pos[0] > cord.limiteX:
+                cord.pos[0] = cord.limiteX
+            elif cord.pos[0] < 0:
+                cord.pos[0] = 0
                 
-            cord.posY += int(math.sin(angulo))
-            if cord.posY > cord.limiteY:
-                cord.posY = cord.limiteY
-            if cord.posY < 0:
-                cord.posY = 0
+            cord.pos[1] += int(math.sin(angulo))
+            if cord.pos[1] > cord.limiteY:
+                cord.pos[1] = cord.limiteY
+            if cord.pos[1] < 0:
+                cord.pos[1] = 0
 
         cord.direcao %= 360
         if cord.direcao < 0:
@@ -41,27 +41,27 @@ def moveSonda( string ):
 def printSondaPosicao():
     dirName = ("E", "N", "W", "S")
     print(" ")
-    for i in range(0, total):
+    for i in range(0, nSondas):
         print("%d %d %s" %(cord.posicao_final_X.pop(0), cord.posicao_final_Y.pop(0), dirName[ int((cord.direcao_final.pop(0)) / 90) ]))
 
     input("\nPressione ENTER para sair")
+    return
     
 def sondas():
-    global total
-    total = nSondas = 2
+    global nSondas
+    nSondas = 3
     
     for n in range(0, nSondas):
         #Coordenadas e direcao da sonda (X, Y, D)
         x, y, d = input("X[%d] Y[%d] D[%d]:  " %((n+1),(n+1),(n+1))).split(" ")
         
         cord.direcao = direct[d]
-        cord.posX = int(x)
-        cord.posY = int(y)
+        cord.pos = [int(x),int(y)]
 
-        if cord.posX > cord.limiteX:
+        if cord.pos[0] > cord.limiteX:
             print("Entrada inválida, valor maior que o limite permitido para X")
             return
-        elif cord.posY > cord.limiteY:
+        elif cord.pos[1] > cord.limiteY:
             print("Entrada inválida, valor maior que o limite permitido para Y")
             return
         
@@ -70,8 +70,8 @@ def sondas():
         
         moveSonda(string)
         
-        cord.posicao_final_X.insert(n, cord.posX)
-        cord.posicao_final_Y.insert(n, cord.posY)
+        cord.posicao_final_X.insert(n, cord.pos[0])
+        cord.posicao_final_Y.insert(n, cord.pos[1])
         cord.direcao_final.insert(n, cord.direcao)
         
     printSondaPosicao()
@@ -80,7 +80,7 @@ def sondas():
 def main():    
     print("***************************************")
     print("******* Explorando Marte - V2 *********")
-    print("***************************************")
+    print("***************************************\n\n")
     
     #Entrada de dados dos limites superiores do quadrante
     limiteX, limiteY = input("Ponto superior-direito: ").split(" ")
