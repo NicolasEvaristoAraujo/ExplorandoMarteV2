@@ -3,21 +3,22 @@ import math
 from classe import Coordenadas
 
 cord = Coordenadas()
+
 direct = {'E': 360, 'W': 180, 'N': 90, 'S': 270}
 
-angulo              = 0
-X                   = 0
-Y                   = 0
+angulo                  = 0;
+x                       = 0;
+y                       = 0;
 
 def moveSonda( string ):
     for letra in string:
-        if letra == 'L':
+        if letra.upper() == 'L':
             cord.direcao += 90
             
-        elif letra == 'R':
+        elif letra.upper() == 'R':
             cord.direcao -= 90
             
-        elif letra == 'M':
+        elif letra.upper() == 'M':
             angulo = cord.direcao
             angulo = (angulo * 2 * math.pi)/360
 
@@ -37,36 +38,48 @@ def moveSonda( string ):
         if cord.direcao < 0:
             cord.direcao += 360
 
-def printSondaPosition():
+def printSondaPosicao():
     dirName = ("E", "N", "W", "S")
-    print("%d %d %s \n" %(cord.posX, cord.posY, dirName[ int(cord.direcao / 90) ]))
+    for i in range(0, total):
+        print("%d %d %s" %(cord.posicao_final_X.pop(0), cord.posicao_final_Y.pop(0), dirName[ int((cord.direcao_final.pop(0)) / 90) ]))
 
 def sondas():
-    #Coordenadas e direcao da sonda (X, Y, D)
-    X, Y, D = input("X Y D: ").split(" ")
+    global total
+    global nSondas
+    total = nSondas = 2
+    
+    for n in range(0, nSondas):
+        #Coordenadas e direcao da sonda (X, Y, D)
+        x, y, d = input("X Y D: ").split(" ")
         
-    cord.direcao = direct[D]
-    cord.posX = int(X)
-    cord.posY = int(Y)
+        cord.direcao = direct[d]
+        cord.posX = int(x)
+        cord.posY = int(y)
         
-    #Entrada de dados para mover a sonda (L, R ou M)
-    string = input("L R ou M: ")
+        #Entrada de dados para mover a sonda (L, R ou M)
+        string = input("L R M: ")
         
-    moveSonda(string)
+        moveSonda(string)
+        
+        cord.posicao_final_X.insert(n, cord.posX)
+        cord.posicao_final_Y.insert(n, cord.posY)
+        cord.direcao_final.insert(n, cord.direcao)
+        
+    printSondaPosicao()
+
 
 def main():    
     print("***************************************")
     print("******* Explorando Marte - V2 *********")
     print("***************************************")
-
+    
     #Entrada de dados dos limites superiores do quadrante
     limiteX, limiteY = input("X Y: ").split(" ")
 
     cord.limiteX = int( limiteX )
     cord.limiteY = int( limiteY )
-
+    
     sondas()
-    printSondaPosition()
-
+    
 if __name__ == '__main__':
     main()
