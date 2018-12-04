@@ -61,10 +61,12 @@ def sondas():
             cord.direcao = direct[d]
             cord.pos = [int(x),int(y)]
             if ((cord.pos[0] > cord.limiteX) or (cord.pos[1] > cord.limiteY)):
-                print("Entrada inválida, valor maior que o limite permitido!")
+                print("\nEntrada inválida, valor maior que o limite permitido!")
+                input("\nPressione ENTER para sair")
                 return False
         except:
-            print("Entrada inválida")
+            print("\nEntrada inválida")
+            input("\nPressione ENTER para sair")
             return False
         
         #Entrada de dados para mover a sonda (L, R ou M)
@@ -95,7 +97,8 @@ def main():
         cord.limiteX = int( limiteX )
         cord.limiteY = int( limiteY )
     except:
-        print("Entrada inválida")
+        print("\nEntrada inválida")
+        input("\nPressione ENTER para sair")
         return False
     
     sondas()
