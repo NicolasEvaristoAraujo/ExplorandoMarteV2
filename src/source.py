@@ -45,7 +45,7 @@ def printSondaPosicao():
         print("%d %d %s" %(cord.posicao_finalX.pop(0), cord.posicao_finalY.pop(0), dirName[ int((cord.direcao_final.pop(0)) / 90) ]))
 
     input("\nPressione ENTER para sair")
-    return
+    return True
     
 def sondas():
     global nSondas
@@ -60,7 +60,7 @@ def sondas():
 
         if ((cord.pos[0] > cord.limiteX) or (cord.pos[1] > cord.limiteY)):
             print("Entrada inválida, valor maior que o limite permitido")
-            return
+            return False
         
         #Entrada de dados para mover a sonda (L, R ou M)
         string = input("Entre com as direções S%d: " %(n+1))
