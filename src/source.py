@@ -52,14 +52,19 @@ def sondas():
     nSondas = 2
     
     for n in range(0, nSondas):
-        #Coordenadas e direcao da sonda (X, Y, D)
+        #Coordenada e direção da sonda (X, Y, D)
         x, y, d = input("X[%d] Y[%d] D[%d]:  " %((n+1),(n+1),(n+1))).split(" ")
-        
-        cord.direcao = direct[d]
-        cord.pos = [int(x),int(y)]
 
-        if ((cord.pos[0] > cord.limiteX) or (cord.pos[1] > cord.limiteY)):
-            print("Entrada inválida, valor maior que o limite permitido")
+        try:
+            int(x)
+            int(y)
+            cord.direcao = direct[d]
+            cord.pos = [int(x),int(y)]
+            if ((cord.pos[0] > cord.limiteX) or (cord.pos[1] > cord.limiteY)):
+                print("Entrada inválida, valor maior que o limite permitido!")
+                return False
+        except:
+            print("Entrada inválida")
             return False
         
         #Entrada de dados para mover a sonda (L, R ou M)
@@ -84,8 +89,14 @@ def main():
     #Entrada de dados dos limites superiores do quadrante
     limiteX, limiteY = input("Ponto superior-direito: ").split(" ")
 
-    cord.limiteX = int( limiteX )
-    cord.limiteY = int( limiteY )
+    try:
+        int(limiteX)
+        int(limiteY)
+        cord.limiteX = int( limiteX )
+        cord.limiteY = int( limiteY )
+    except:
+        print("Entrada inválida")
+        return False
     
     sondas()
     
